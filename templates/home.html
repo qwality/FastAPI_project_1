@@ -1,1 +1,30 @@
-hello world {{name}}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tlačítko v HTML 2.1</title>
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+    <!-- <script src="https://unpkg.com/hx"></script> -->
+</head>
+<body>
+
+<h2 id="nadpis_1">Tlačítko v HTML 2.6</h2>
+
+<!-- <button onclick="sendRequest()">Klikněte zde</button> -->
+<button hx-get="/button/pepa" hx-trigger="mouseover, click" hx-params="*" hx-target="#nadpis_1">Klikněte zde</button>
+
+<!-- <script>
+function sendRequest() {
+  fetch('/data')
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      // Zde můžete zachytit chyby, které se mohou vyskytnout při provádění požadavku
+      console.error('Chyba:', error);
+    });
+}
+</script> -->
+
+</body>
+</html>

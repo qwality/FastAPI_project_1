@@ -1,3 +1,3 @@
 import requests
 
-print(requests.get("http://127.0.0.1:8000/dsfad").text)
+print(requests.get("http://127.0.0.1:8000/button/").text)
