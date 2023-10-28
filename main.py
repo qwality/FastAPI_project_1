@@ -15,6 +15,7 @@ async def index(request: Request, name: str):
 @app.get("/{other}")
 async def index(request: Request):
     return '404'
+#poznamka
 
 
 
