@@ -115,7 +115,7 @@ async def get_current_active_user(current_user: UserInDB = Depends(get_current_u
     if current_user.disabled:
         raise HTTPException(status_code=400, detail='Inactive user')
     return current_user
-
+# adadadad
 # from icecream import ic
 
 @app.post('/token', response_model=Token)
