@@ -71,6 +71,8 @@ class Database:
             hashed_password = Column(String)
             disabled        = Column(Boolean)
 
+        #pridat neco na pridavani modelu
+
     def __init__(self, path: str):
         self.engine         = create_engine(
                                     path,
@@ -92,6 +94,7 @@ class Database:
     def create_all(self):
         self.models.Base.metadata.create_all(bind=self.engine)
 
+#udelat funkci na prevod mezi detmi BaseModel a Base bo jinak se to zatim robi rucne
 
 a = Data(name='pepa', msg='novak je gay')
 print(a)
