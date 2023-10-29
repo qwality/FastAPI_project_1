@@ -5,7 +5,9 @@ data = {'name': 'karel', 'msg': 'ma druhe misto'}
 my_test_data = Data.model_validate(data)
 # print(my_test_data.model_dump_json())
 
-print(get_password_hash('1234'))
+# print(get_password_hash('1234'))
+
+
 
 
 # print(requests.delete(f"http://127.0.0.1:8000/db/6"))
