@@ -7,14 +7,85 @@
     <script src="https://unpkg.com/htmx.org@1.6.1"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/event-header.js"></script>
     <!-- <script src="https://unpkg.com/hx"></script> -->
+    <script>
+      htmx.defineExtension('my-ext', {
+        onEvent : function(name, evt) {
+          if(name == 'htmx:beforeSend'){
+            const token = localStorage.getItem('access_token')
+            evt.detail.requestConfig.headers['Authorization'] = 'Bearer ' + token;
+            console.log("Fired event: " + name, evt.detail.requestConfig.headers);
+          }
+        }
+      })
+      htmx.defineExtension('my-ext2', {
+        onEvent : function(name, evt) {
+            if(name){
+            console.log("Fired event: " + name, evt);
+          }
+        }
+      })
+    </script>
 </head>
 <body>
 
 <h2 id="nadpis_1">Tlačítko v HTML 2.6</h2>
 
+<form id="login-form">
+        <div>
+            <label for="username">Uživatelské jméno:</label><br>
+            <input type="text" id="username" name="username"><br>
+        </div>
+        <div>
+            <label for="password">Heslo:</label><br>
+            <input type="password" id="password" name="password"><br>
+        </div>
+        <div>
+            <input type="submit" value="Přihlásit se">
+        </div>
+    </form>
+
+    <script>
+        const form = document.getElementById('login-form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const response = await fetch('/token', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            localStorage.setItem('access_token', data.access_token);
+            alert(data.access_token)
+        });
+    </script>
+
 <!-- <button onclick="sendRequest()">Klikněte zde</button> -->
 {{ button('franta', 'nazev tlacitka', 'nadpis_1') }}
 <button hx-get="/button/pepa" hx-trigger="click, mouseover" hx-vals='{"my_val": "My Value"}' hx-ext="event-header" hx-target="#nadpis_1">click or mouseover</button>
+<button hx-get="/user/me/" hx-target="#nadpis_1" hx-ext="my-ext">user data</button>
+
+<button onclick="getUserData()" >Získat data uživatele</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org/dist/htmx.min.js"></script>
+    <script>
+        async function getUserData() {
+            const token = localStorage.getItem('access_token');
+            if (token) {
+                const headers = { 'Authorization': `Bearer ${token}` };
+                const response = await fetch('/user/me/', {
+                    method: 'GET',
+                    headers: headers
+                });
+                const data = await response.json();
+                // zde můžete dále zpracovávat data
+                {# alert(data.user_data); #}
+                document.getElementById('nadpis_1').innerText = data.user_data;
+            } else {
+                console.error('Chybí autorizační token.');
+            }
+        }
+    </script>
+
 
 <!-- <script>
 function sendRequest() {
