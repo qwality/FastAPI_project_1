@@ -138,6 +138,7 @@ async def read_user_me(current_user: User = Depends(get_current_active_user)):
     print(current_user.user_name)
     return current_user
 #fgregre
+#fewrter
 
 # @app.get('/user/me/', response_model=User)
 # async def read_user_data(current_user: User = Depends(get_current_active_user)):
