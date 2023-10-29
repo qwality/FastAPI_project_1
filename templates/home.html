@@ -1,3 +1,5 @@
+{% from 'macros/button.html' import button %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +12,8 @@
 <h2 id="nadpis_1">Tlačítko v HTML 2.6</h2>
 
 <!-- <button onclick="sendRequest()">Klikněte zde</button> -->
-<button hx-get="/button/pepa" hx-trigger="mouseover, click" hx-params="*" hx-target="#nadpis_1">Klikněte zde</button>
+{{ button('franta', 'nazev tlacitka', 'nadpis_1') }}
+<button hx-get="/button/pepa" hx-trigger="click" hx-vals='{"my_val": "My Value"}' hx-target="#nadpis_1">click</button>
 
 <!-- <script>
 function sendRequest() {

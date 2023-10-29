@@ -1,1 +1,3 @@
-{{data}}
+{% macro button(id, label, target_id) -%}
+<button id='{{id}}' hx-get="/button/{{id}}" hx-target="#{{target_id}}">{{label}}</button>
+{%- endmacro %}
