@@ -5,6 +5,7 @@
 <head>
 <title>Tlačítko v HTML 2.1</title>
     <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/event-header.js"></script>
     <!-- <script src="https://unpkg.com/hx"></script> -->
 </head>
 <body>
@@ -13,7 +14,7 @@
 
 <!-- <button onclick="sendRequest()">Klikněte zde</button> -->
 {{ button('franta', 'nazev tlacitka', 'nadpis_1') }}
-<button hx-get="/button/pepa" hx-trigger="click" hx-vals='{"my_val": "My Value"}' hx-target="#nadpis_1">click</button>
+<button hx-get="/button/pepa" hx-trigger="click, mouseover" hx-vals='{"my_val": "My Value"}' hx-ext="event-header" hx-target="#nadpis_1">click or mouseover</button>
 
 <!-- <script>
 function sendRequest() {

@@ -2,6 +2,7 @@
 from fastapi import FastAPI, HTTPException, Request, Query
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import JSONResponse, HTMLResponse
+import json
 # from pydantic import BaseModel
 # import jinja2
 
@@ -20,8 +21,20 @@ async def get_data():
 
 @app.get("/button/{button_name}", response_class=HTMLResponse)
 async def button(request: Request, button_name:str='empty'):
-    context = {'request': request, 'data':{"message": f"<strong>button</strong> name is {button_name}"}}
-    print(request.query_params.multi_items())
+    event_type = json.loads(request.headers.get('triggering-event'))['type']
+    context = {
+        'request': request,
+        'data': {
+            'message': f'<strong>button</strong> name is {button_name}',
+            'event_type': event_type
+            }
+        }
+    
+    # print(request.query_params.multi_items())
+    # print()
+    print()
+    # print()
+    # print(request.headers)
     return templates.TemplateResponse('button.html', context)
 
 
