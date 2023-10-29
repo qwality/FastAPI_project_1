@@ -39,11 +39,11 @@ async def get_data():
     return JSONResponse(content=data)
 
 @app.get('/db')
-def read_db(db: Session = Depends(get_db)):
+def read_data(db: Session = Depends(get_db)):
     return db.query(models.Data).all()
 
 @app.post('/db')
-def post_db(data: Data, db: Session = Depends(get_db)):
+def post_data(data: Data, db: Session = Depends(get_db)):
     data_model = models.Data()
     data_model.name = data.name
     data_model.msg = data.msg
@@ -52,9 +52,36 @@ def post_db(data: Data, db: Session = Depends(get_db)):
     db.commit()
 
     return data
+
+@app.put('/db/{data_id}')
+def update_data(data_id: int, data: Data, db: Session = Depends(get_db)):
+    data_model = db.query(models.Data).filter(models.Data.id == data_id).first()
+    if data_model is None:
+        raise HTTPException(
+            status_code=404,
+            detail=f'data with id: {data_id} does not exist'
+        )
     
+    data_model.name = data.name
+    data_model.msg  = data.msg
+    
+    db.add(data_model)
+    db.commit()
 
+    return data
 
+@app.delete('/db/{data_id}')
+def delete_data(data_id: int, db: Session = Depends(get_db)):
+    data_model = db.query(models.Data).filter(models.Data.id == data_id).first()
+    if data_model is None:
+        raise HTTPException(
+            status_code=404,
+            detail=f'data with id: {data_id} does not exist'
+        )
+    db.query(models.Data).filter(models.Data.id == data_id).delete()
+    db.commit()
+    return True
+    
 
 @app.get("/button/{button_name}", response_class=HTMLResponse)
 async def button(request: Request, button_name:str='empty'):
