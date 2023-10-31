@@ -69,9 +69,9 @@ class Data(BaseModel):
     name: str = Field(min_length=1)
     msg : str = Field(min_length=1)
 
-@app.get('herna')
+@app.get('/herna')
 async def herna(request: Request):
-    pass
+    return templates.TemplateResponse('hrani_s_css.html', {'request': request})
 
 @app.get('/sulinovina')
 async def sulinovina(request: Request):
@@ -150,6 +150,5 @@ async def button(request: Request, button_name:str='empty'):
 async def index(request: Request, other: str=''):
     return f'{other} is not a thing u fool'
 
-#dfd
 
 

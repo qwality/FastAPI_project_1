@@ -7,3 +7,4 @@ passlib
 jinja2
 python-multipart
 bcrypt
+'sqlite3'

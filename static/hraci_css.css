@@ -1,0 +1,63 @@
+:root{
+    --tiny: 5px;
+    --small: 10px;
+    --normal: 50px;
+    --big: 200px;
+}
+
+* {
+    color: #555;
+}
+
+html, body {
+    margin: 0 var(--tiny);
+}
+html{
+    background-color: pink;
+}
+
+body{
+    background-color: darkgray;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* div {
+    
+} */
+
+.d-main {
+    background-color: gray;
+    padding: var(--tiny) 0;
+    height: 100%;
+    display: flex;
+    flex: 1;
+}
+
+.d-common {
+    flex: 1;
+    border: var(--tiny) solid burlywood;
+}
+
+
+.d1 {
+    background-color: bisque;
+    margin: 0 var(--small);
+}
+.d2 {
+    flex: 2;
+    background-color: azure;
+}
+.d3 {
+    padding: 0 var(--normal);
+    background-color: aquamarine;
+}
+
+.d-bot {
+    /* temp height */
+    height: var(--big);
+    background-color: burlywood;
+}
+
+

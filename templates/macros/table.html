@@ -1,0 +1,25 @@
+{% macro table(rows, cols, table_id) -%}
+<button class='btn btn-primary' id='{{id}}' hx-get="/button/{{id}}" hx-target="#{{target_id}}">{{label}}</button>
+<table>
+    <tr>
+        <th>Jméno</th>
+        <th>Příjmení</th>
+        <th>Profese</th>
+    </tr>
+    <tr>
+        <td>Jan</td>
+        <td>Novák</td>
+        <td>Programátor</td>
+    </tr>
+    <tr>
+        <td>Marie</td>
+        <td>Dvořáková</td>
+        <td>Designér</td>
+    </tr>
+    <tr>
+        <td>Petr</td>
+        <td>Černý</td>
+        <td>Manažer</td>
+    </tr>
+</table>
+{%- endmacro %}

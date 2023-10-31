@@ -1,0 +1,7 @@
+1. connect reac and fastapi
+2. dodelat databaze
+3. uklidit v mainu --- pridat funkci na vytvareni endpointu
+4. udelat testovaci file.py pro command linu
+5. udelat table macro nejlepe v reactu (rozdat id at odpovida radku a sloupci)
+6. z hrani s css udelat main
+7. dale pokracovat v reactu udelat ze vsech blbosti komponenty
