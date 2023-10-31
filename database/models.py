@@ -8,6 +8,10 @@ class Data(Base):
     name    = Column(String)
     msg     = Column(String)
 
+    @classmethod
+    def a(cls):
+        return 'a'
+
 class User(Base):
     __tablename__ = 'users'
 

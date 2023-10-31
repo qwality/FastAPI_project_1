@@ -1,0 +1,19 @@
+body{
+    background-color: rgb(79, 79, 79);
+}
+h2{
+    position: absolute;
+    top: 0px
+}
+#nadpis_1{
+    width: -webkit-fill-available;
+    text-align: center;
+}
+.btn-group{
+    width: -webkit-fill-available;
+}
+#login-form{
+    
+    text-align: center;
+    margin-top: 100px;
+}

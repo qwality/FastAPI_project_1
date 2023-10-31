@@ -15,15 +15,18 @@ from sqlalchemy.orm import Session
 # from jose import JWSError, jwt
 # from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.staticfiles import StaticFiles
 # from fastapi import status
+from decouple import config
 
 app = FastAPI()
+
 templates = Jinja2Templates(directory='templates')
 
 #openssl rand -hex 32
-SECRET_KEY = '9e21b7282bfdb4f6c2cb488d8ba9b89898da79c1990c95b338e2ee5dc253396c'
-ALGORITHM = 'HS256'
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+SECRET_KEY = config('SECRET_KEY')
+ALGORITHM = config('ALGORITHM')
+ACCESS_TOKEN_EXPIRE_MINUTES = config('ACCESS_TOKEN_EXPIRE_MINUTES')
 
 db = {
     'user_1_should_be_name': {
@@ -33,10 +36,15 @@ db = {
         'disabled': False
     }
 }
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 from modules.security import Security
 
 security = Security(SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES, db)
+
+from modules.database import Database
+
+database = Database('sqlite:///./database_from_modules.db')
 
 @app.post('/token', response_model=Security.Token)
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm=Depends()):
@@ -60,6 +68,14 @@ def get_db():
 class Data(BaseModel):
     name: str = Field(min_length=1)
     msg : str = Field(min_length=1)
+
+@app.get('herna')
+async def herna(request: Request):
+    pass
+
+@app.get('/sulinovina')
+async def sulinovina(request: Request):
+    return templates.TemplateResponse('sulinovina.html', {'request': request})
 
 @app.get("/")
 async def index(request: Request, name: str='empty'):

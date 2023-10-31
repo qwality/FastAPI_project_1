@@ -1,0 +1,9 @@
+fastapi
+sqlalchemy
+python-decouple
+requests
+python-jose
+passlib
+jinja2
+python-multipart
+bcrypt

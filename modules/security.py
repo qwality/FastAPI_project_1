@@ -1,5 +1,5 @@
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from datetime import datetime, timedelta
@@ -46,7 +46,7 @@ class Security:
                           planuju mit ty usery ale zatim to je json {user:{nejake_sracky: a jejich hodnoty}}'''
         self._secret_key                    = secret_key
         self._algorithm                     = algorithm
-        self._access_token_expire_minutes   = access_token_expire_minutes
+        self._access_token_expire_minutes   = int(access_token_expire_minutes)
         self._db                            = database
 
         self._pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
@@ -133,3 +133,27 @@ class Security:
         access_token_expires = timedelta(minutes=self._access_token_expire_minutes)
         access_token = self.create_access_token(data={'sub': user.user_name}, expires_delta=access_token_expires)
         return {'access_token': access_token, 'token_type': 'bearer'}
+    
+# import time
+
+# class Security_2:
+#     _secret_key: str
+#     _algorithm : str
+#     _access_token_expire_minutes : int
+
+#     def token_response(self, token: str):
+#         return {'access_token': token}
+    
+#     def sign(self, user_id: int):
+#         payload = {
+#             'user_id': user_id,
+#             'expiry' : time.time() + 600
+#         }
+#         token = jwt.encode(payload, self._secret_key, algorithm=self._algorithm)
+#         return self.token_response(token)
+    
+#     def decode(self, token: str):
+#         try:
+#             decode_token = jwt.decode(token, self._secret_key, algorithms=self._algorithm)
+#             return decode_token if decode_token['expiry'] >= time.time() else None
+#         except: return None
