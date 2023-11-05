@@ -44,7 +44,7 @@ security = Security(SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES, db)
 
 from modules.database import Database
 
-database = Database('sqlite:///./database_from_modules.db')
+# database = Database('sqlite:///./database_from_modules.db')
 
 @app.post('/token', response_model=Security.Token)
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm=Depends()):
