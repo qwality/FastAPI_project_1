@@ -48,12 +48,12 @@ from modules.database import Database
 
 @app.post('/token', response_model=Security.Token)
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm=Depends()):
-    print(f'usr: {form_data.username}\npswd: {form_data.password}')
+    # print(f'usr: {form_data.username}\npswd: {form_data.password}')
     return security.login_for_access_token(form_data)
 
 @app.get('/user/me/', response_model=Security.User)
 async def read_user_me(current_user: Security.User = Depends(security.get_current_active_user)):
-    print(current_user.user_name)
+    # print(current_user.user_name)
     return current_user
 
 models.Base.metadata.create_all(bind=engine)
